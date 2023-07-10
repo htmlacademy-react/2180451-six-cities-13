@@ -1,15 +1,15 @@
-import MainPage from '../components/pages/main-page/MainPage';
-import Header from '../components/layouts/header/Header';
+import MainPage from './components/pages/main-page/main-page';
+import Header from './components/layouts/header/Header';
 
-type AppCountProps = {
+type AppProps = {
   offersCount: number;
 }
 
-export default function App({offersCount}: AppCountProps) {
+export default function App({offersCount}: AppProps): JSX.Element {
   return (
-    <div>
+    <>
       <Header />
       <MainPage offersCount={offersCount} />
-    </div>
+    </>
   );
 }

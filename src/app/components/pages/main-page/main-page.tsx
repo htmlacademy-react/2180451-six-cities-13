@@ -1,10 +1,10 @@
-import TownCard from '../../ui/town-card/TownCard';
+import TownCard from '../../ui/town-card/town-card';
 
-type offerCountProps = {
+type MainPageProps = {
   offersCount: number;
 }
 
-export default function MainPage({offersCount}: offerCountProps): JSX.Element {
+export default function MainPage({offersCount}: MainPageProps): JSX.Element {
   return (
     <div>
       <h1 className='visually-hidden'>Cities</h1>
