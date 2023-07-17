@@ -28,7 +28,7 @@ export default function App({ offersCount }: AppProps): JSX.Element {
           }
           />
           <Route path={AppRoute.Login} element={<Login />} />
-          <Route path={AppRoute.Offer} element={<Offer />} />
+          <Route path={AppRoute.Offer} element={<Offer authStatus={AuthorizationStatus.NoAuth} />} />
         </Route>
         <Route path='*' element={<PageNotFound />} />
       </Routes>
