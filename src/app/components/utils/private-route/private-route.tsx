@@ -6,7 +6,6 @@ type PrivateRouteProps = {
   authStatus: string;
 };
 
-
 function PrivateRoute({authStatus, children}: PrivateRouteProps): JSX.Element {
   return authStatus === AuthorizationStatus.Auth ? children : <Navigate to={'/login'} />;
 }
