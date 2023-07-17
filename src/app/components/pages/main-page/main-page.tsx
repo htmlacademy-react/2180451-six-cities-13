@@ -1,10 +1,11 @@
-import TownCard from '../../ui/town-card/town-card';
+import HotelCard from '../../ui/hotel-card/hotel-card';
+import { hotelList } from '../../../../constants';
 
 type MainPageProps = {
   offersCount: number;
 }
 
-export default function MainPage({offersCount}: MainPageProps): JSX.Element {
+export default function MainPage(props: MainPageProps): JSX.Element {
   return (
     <div>
       <h1 className='visually-hidden'>Cities</h1>
@@ -48,7 +49,7 @@ export default function MainPage({offersCount}: MainPageProps): JSX.Element {
         <div className='cities__places-container container'>
           <section className='cities__places places'>
             <h2 className='visually-hidden'>Places</h2>
-            <b className='places__found'>{offersCount} places to stay in Amsterdam</b>
+            <b className='places__found'>{props.offersCount} places to stay in Amsterdam</b>
             <form className='places__sorting' action='#' method='get'>
               <span className='places__sorting-caption'>Sort by</span>
               <span className='places__sorting-type' tabIndex={0}>
@@ -65,11 +66,9 @@ export default function MainPage({offersCount}: MainPageProps): JSX.Element {
               </ul>
             </form>
             <div className='cities__places-list places__list tabs__content'>
-              <TownCard />
-              <TownCard />
-              <TownCard />
-              <TownCard />
-              <TownCard />
+              {hotelList.map((hotel) =>
+                <HotelCard hotelCard={hotel} key={hotel.id}/>
+              )}
             </div>
           </section>
           <div className='cities__right-section'>

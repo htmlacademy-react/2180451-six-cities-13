@@ -1,4 +1,4 @@
-export default function Login() {
+export default function Login(): JSX.Element {
   return (
     <main className="page__main page__main--login">
       <div className="page__login-container container">
