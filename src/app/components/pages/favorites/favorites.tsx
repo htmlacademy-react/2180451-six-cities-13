@@ -1,6 +1,16 @@
+import { Helmet } from 'react-helmet-async';
+import Header from '../../layouts/header/header';
+import { AuthorizationStatus } from '../../../../constants';
+import Footer from '../../layouts/footer/footer';
+
 export default function Favorites(): JSX.Element {
   return (
-    <div>
+    <div className="page">
+      <Helmet>
+        <title>Избранное</title>
+      </Helmet>
+      <Header authStatus={AuthorizationStatus.NoAuth} />
+
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <section className="favorites">
@@ -130,11 +140,7 @@ export default function Favorites(): JSX.Element {
           </section>
         </div>
       </main>
-      <footer className="footer container">
-        <a className="footer__logo-link" href="main.html">
-          <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />
-        </a>
-      </footer>
+      <Footer />
     </div>
   );
 }
