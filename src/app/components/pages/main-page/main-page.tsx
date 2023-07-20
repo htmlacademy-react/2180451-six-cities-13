@@ -1,13 +1,15 @@
 import { Helmet } from 'react-helmet-async';
-import HotelCard from '../../ui/hotel-card/hotel-card';
-import { AuthorizationStatus, hotelList } from '../../../../constants';
+import { AuthorizationStatus } from '../../../../constants';
 import Header from '../../layouts/header/header';
+import { OfferType } from '../../../types/offer-type';
+import HotelList from '../../ui/hotel-list/hotel-list';
 
 type MainPageProps = {
   offersCount: number;
+  offerList: OfferType[];
 }
 
-export default function MainPage(props: MainPageProps): JSX.Element {
+export default function MainPage({ offersCount, offerList }: MainPageProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <Helmet>
@@ -57,7 +59,7 @@ export default function MainPage(props: MainPageProps): JSX.Element {
           <div className='cities__places-container container'>
             <section className='cities__places places'>
               <h2 className='visually-hidden'>Places</h2>
-              <b className='places__found'>{props.offersCount} places to stay in Amsterdam</b>
+              <b className='places__found'>{offersCount} places to stay in Amsterdam</b>
               <form className='places__sorting' action='#' method='get'>
                 <span className='places__sorting-caption'>Sort by</span>
                 <span className='places__sorting-type' tabIndex={0}>
@@ -74,9 +76,7 @@ export default function MainPage(props: MainPageProps): JSX.Element {
                 </ul>
               </form>
               <div className='cities__places-list places__list tabs__content'>
-                {hotelList.map((hotel) =>
-                  <HotelCard hotelCard={hotel} key={hotel.id} />
-                )}
+                <HotelList offerList={offerList} />
               </div>
             </section>
             <div className='cities__right-section'>
