@@ -9,7 +9,7 @@ type HotelCardProps = {
 
 export default function HotelCard({ hotelCard }: HotelCardProps): JSX.Element {
 
-  const [active, setActive] = useState(false);
+  const [,setActive] = useState(false);
 
   return (
     <article className='cities__card place-card'

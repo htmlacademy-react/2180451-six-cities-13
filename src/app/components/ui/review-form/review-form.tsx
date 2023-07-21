@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 export default function ReviewForm(): JSX.Element {
 
-  const [rate, setRate] = useState('');
+  const [, setRate] = useState('');
   const [review, setReview] = useState('');
   const reviewTextChecking: boolean = review.length < 50;
 
