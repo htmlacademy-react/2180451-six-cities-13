@@ -2,19 +2,16 @@ import { useState } from 'react';
 
 export default function ReviewForm(): JSX.Element {
 
-  const [rate, SetRate] = useState('');
-  const [review, SetReview] = useState('');
-
-  function reviewTextChecking(): boolean {
-    return review.length < 50;
-  }
+  const [rate, setRate] = useState('');
+  const [review, setReview] = useState('');
+  const reviewTextChecking: boolean = review.length < 50;
 
   return (
     <form className='reviews__form form' action='#' method='post'>
       <label className='reviews__label form__label' htmlFor='review'>Your review</label>
       <div className='reviews__rating-form form__rating'>
         <input
-          onChange={(evt) => SetRate(evt.target.value)}
+          onChange={(evt) => setRate(evt.target.value)}
           className='form__rating-input visually-hidden'
           name='rating'
           value='5'
@@ -28,7 +25,7 @@ export default function ReviewForm(): JSX.Element {
         </label>
 
         <input
-          onChange={(evt) => SetRate(evt.target.value)}
+          onChange={(evt) => setRate(evt.target.value)}
           className='form__rating-input visually-hidden'
           name='rating'
           value='4'
@@ -42,7 +39,7 @@ export default function ReviewForm(): JSX.Element {
         </label>
 
         <input
-          onChange={(evt) => SetRate(evt.target.value)}
+          onChange={(evt) => setRate(evt.target.value)}
           className='form__rating-input visually-hidden'
           name='rating'
           value='3'
@@ -56,7 +53,7 @@ export default function ReviewForm(): JSX.Element {
         </label>
 
         <input
-          onChange={(evt) => SetRate(evt.target.value)}
+          onChange={(evt) => setRate(evt.target.value)}
           className='form__rating-input visually-hidden'
           name='rating'
           value='2'
@@ -70,7 +67,7 @@ export default function ReviewForm(): JSX.Element {
         </label>
 
         <input
-          onChange={(evt) => SetRate(evt.target.value)}
+          onChange={(evt) => setRate(evt.target.value)}
           className='form__rating-input visually-hidden'
           name='rating'
           value='1'
@@ -84,7 +81,7 @@ export default function ReviewForm(): JSX.Element {
         </label>
       </div>
       <textarea
-        onChange={(evt) => SetReview(evt.target.value)}
+        onChange={(evt) => setReview(evt.target.value)}
         className='reviews__textarea form__textarea'
         id='review'
         name='review'
@@ -96,12 +93,9 @@ export default function ReviewForm(): JSX.Element {
           To submit review please make sure to set <span className='reviews__star'>rating</span> and describe your stay with at least <b className='reviews__text-amount'>50 characters</b>.
         </p>
         <button
-          onClick={(evt) => {
-            evt.preventDefault();
-            alert(`Rating: ${rate} \nReview: ${review}`);
-          }}
+          onClick={(evt) => evt.preventDefault()}
           className='reviews__submit form__submit button' type='submit'
-          disabled={reviewTextChecking()}
+          disabled={reviewTextChecking}
         >
           Submit
         </button>

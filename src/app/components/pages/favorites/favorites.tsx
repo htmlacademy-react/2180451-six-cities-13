@@ -11,7 +11,7 @@ type FavoritesProps = {
 
 export default function Favorites({ offerList }: FavoritesProps): JSX.Element {
 
-  const favoritesList = offerList.filter((offer) => offer.isFavorite === true);
+  const favoritesList = offerList.filter((offer) => offer.isFavorite);
 
   return (
     <div className="page">
@@ -34,12 +34,11 @@ export default function Favorites({ offerList }: FavoritesProps): JSX.Element {
                   </div>
                 </div>
                 <div className="favorites__places">
-                  {favoritesList && favoritesList.map((offer: OfferType) =>
+                  {favoritesList?.map((offer: OfferType) =>
                     <FavoritesCard favoriteCard={offer} key={offer.id} />
                   )}
                 </div>
               </li>
-              {/*
               <li className="favorites__locations-items">
                 <div className="favorites__locations locations locations--current">
                   <div className="locations__item">
@@ -50,7 +49,7 @@ export default function Favorites({ offerList }: FavoritesProps): JSX.Element {
                 </div>
                 <div className="favorites__places">
                 </div>
-              </li> */}
+              </li>
             </ul>
           </section>
         </div>

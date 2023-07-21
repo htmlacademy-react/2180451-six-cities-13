@@ -8,11 +8,10 @@ type FavoritesCardProps = {
 export default function FavoritesCard({ favoriteCard }: FavoritesCardProps): JSX.Element {
   return (
     <article className="favorites__card place-card">
-      {favoriteCard.isPremium ?
+      {favoriteCard.isPremium &&
         <div className="place-card__mark">
           <span>Premium</span>
-        </div> :
-        null}
+        </div>}
       <div className="favorites__image-wrapper place-card__image-wrapper">
         <Link to="#">
           <img className="place-card__image" src={favoriteCard.previewImage} width="150" height="110" alt="Place image" />

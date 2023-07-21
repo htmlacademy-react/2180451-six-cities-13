@@ -53,11 +53,10 @@ export default function Offer({ authStatus, offerList }: OfferProps): JSX.Elemen
               </div>
               <div className="offer__container container">
                 <div className="offer__wrapper">
-                  {filteredOffer.isPremium ?
+                  {filteredOffer.isPremium &&
                     <div className="offer__mark">
                       <span>Premium</span>
-                    </div>
-                    : null}
+                    </div>}
                   <div className="offer__name-wrapper">
                     <h1 className="offer__name">
                       {filteredOffer.title}
@@ -174,7 +173,7 @@ export default function Offer({ authStatus, offerList }: OfferProps): JSX.Elemen
                         </div>
                       </li>
                     </ul>
-                    {authStatus === AuthorizationStatus.Auth ? <ReviewForm /> : null}
+                    {authStatus === AuthorizationStatus.Auth && <ReviewForm />}
                   </section>
                 </div>
               </div>
