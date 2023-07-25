@@ -10,3 +10,6 @@ export const AppRoute = {
   Favorites: '/favorites',
   Offer: '/offer/:id',
 } as const;
+
+export const MARKER_DEFAULT = 'img/pin.svg';
+export const MARKER_ACTIVE = 'img/pin-active.svg';

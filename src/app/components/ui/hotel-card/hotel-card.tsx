@@ -1,20 +1,24 @@
 import { OfferType } from '../../../types/offer-type';
-import { useState } from 'react';
 import { Link, generatePath } from 'react-router-dom';
 import { AppRoute } from '../../../../constants';
 
 type HotelCardProps = {
   hotelCard: OfferType;
+  onMouseEnter: (id: string) => void;
+  onMouseLeave: () => void;
 }
 
-export default function HotelCard({ hotelCard }: HotelCardProps): JSX.Element {
+export default function HotelCard({ hotelCard, onMouseEnter, onMouseLeave }: HotelCardProps): JSX.Element {
 
-  const [,setActive] = useState(false);
+  const mouseEnterHandler = () => {
+    onMouseEnter?.(hotelCard.id);
+  };
 
   return (
-    <article className='cities__card place-card'
-      onMouseEnter={() => setActive(true)}
-      onMouseLeave={() => setActive(false)}
+    <article
+      className='cities__card place-card'
+      onMouseEnter={mouseEnterHandler}
+      onMouseLeave={onMouseLeave}
     >
       {hotelCard.isPremium &&
         <div className='place-card__mark'>
@@ -45,7 +49,7 @@ export default function HotelCard({ hotelCard }: HotelCardProps): JSX.Element {
           </div>
         </div>
         <h2 className='place-card__name'>
-          <Link to={generatePath(AppRoute.Offer, {id: hotelCard.id})}>{hotelCard.title}</Link>
+          <Link to={generatePath(AppRoute.Offer, { id: hotelCard.id })}>{hotelCard.title}</Link>
         </h2>
         <p className='place-card__type'>{hotelCard.type}</p>
       </div>

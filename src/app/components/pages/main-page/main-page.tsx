@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { AuthorizationStatus } from '../../../../constants';
 import Header from '../../layouts/header/header';
 import { OfferType } from '../../../types/offer-type';
 import HotelList from '../../ui/hotel-list/hotel-list';
+import Map from '../../map/map';
 
 type MainPageProps = {
   offersCount: number;
@@ -10,6 +12,17 @@ type MainPageProps = {
 }
 
 export default function MainPage({ offersCount, offerList }: MainPageProps): JSX.Element {
+
+  const [selectedOffer, setSelectedOffer] = useState('');
+
+  const onMouseEnter = ((id: string) => {
+    setSelectedOffer(id);
+  });
+
+  const onMouseLeave = (() => {
+    setSelectedOffer('');
+  });
+
   return (
     <div className="page page--gray page--main">
       <Helmet>
@@ -76,11 +89,17 @@ export default function MainPage({ offersCount, offerList }: MainPageProps): JSX
                 </ul>
               </form>
               <div className='cities__places-list places__list tabs__content'>
-                <HotelList offerList={offerList} />
+                <HotelList
+                  offerList={offerList}
+                  onMouseEnter={onMouseEnter}
+                  onMouseLeave={onMouseLeave}
+                />
               </div>
             </section>
             <div className='cities__right-section'>
-              <section className='cities__map map'></section>
+              <section className='cities__map map'>
+                <Map offerList={offerList} selectedOffer={selectedOffer} />
+              </section>
             </div>
           </div>
         </div>
