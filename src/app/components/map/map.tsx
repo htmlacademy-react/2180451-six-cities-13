@@ -6,10 +6,12 @@ import useMap from '../hooks/use-map';
 
 type MapProps = {
   offerList: OfferType[];
-  selectedOffer: string;
+  selectedOffer?: string;
+  width: number;
+  height: number;
 }
 
-export default function Map({ offerList, selectedOffer }: MapProps): JSX.Element {
+export default function Map({ offerList, selectedOffer, height, width }: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, offerList);
 
@@ -51,7 +53,7 @@ export default function Map({ offerList, selectedOffer }: MapProps): JSX.Element
 
   return (
     <div
-      style={{ height: '794px' }}
+      style={{ height: `${height}px`, width: `${width}px` }}
       ref={mapRef}
     >
     </div>

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { AuthorizationStatus } from '../../../../constants';
+import { AuthorizationStatus, MAIN_PAGE_MAP_SIZE } from '../../../../constants';
 import Header from '../../layouts/header/header';
 import { OfferType } from '../../../types/offer-type';
 import HotelList from '../../ui/hotel-list/hotel-list';
@@ -98,7 +98,12 @@ export default function MainPage({ offersCount, offerList }: MainPageProps): JSX
             </section>
             <div className='cities__right-section'>
               <section className='cities__map map'>
-                <Map offerList={offerList} selectedOffer={selectedOffer} />
+                <Map
+                  offerList={offerList}
+                  selectedOffer={selectedOffer}
+                  height={MAIN_PAGE_MAP_SIZE.height}
+                  width={MAIN_PAGE_MAP_SIZE.width}
+                />
               </section>
             </div>
           </div>

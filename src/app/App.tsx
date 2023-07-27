@@ -10,13 +10,15 @@ import Offer from './components/pages/offer/offer';
 import PrivateRoute from './components/utils/private-route/private-route';
 import { AuthorizationStatus, AppRoute } from '../constants';
 import { OfferType } from './types/offer-type';
+import { ReviewType } from './types/review-type';
 
 type AppProps = {
   offersCount: number;
   offerList: OfferType[];
+  reviewList: ReviewType[];
 }
 
-export default function App({ offersCount, offerList }: AppProps): JSX.Element {
+export default function App({ offersCount, offerList, reviewList }: AppProps): JSX.Element {
 
   return (
     <HelmetProvider>
@@ -31,7 +33,7 @@ export default function App({ offersCount, offerList }: AppProps): JSX.Element {
           }
           />
           <Route path={AppRoute.Login} element={<Login />} />
-          <Route path={AppRoute.Offer} element={<Offer authStatus={AuthorizationStatus.Auth} offerList={offerList} />} />
+          <Route path={AppRoute.Offer} element={<Offer authStatus={AuthorizationStatus.Auth} offerList={offerList} reviewList={reviewList} />} />
           <Route path='*' element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
