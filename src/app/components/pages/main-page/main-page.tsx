@@ -1,25 +1,24 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { AuthorizationStatus } from '../../../../constants';
+import { AuthorizationStatus, MapSize } from '../../../../constants';
 import Header from '../../layouts/header/header';
 import { OfferType } from '../../../types/offer-type';
 import HotelList from '../../ui/hotel-list/hotel-list';
 import Map from '../../map/map';
 
 type MainPageProps = {
-  offersCount: number;
   offerList: OfferType[];
 }
 
-export default function MainPage({ offersCount, offerList }: MainPageProps): JSX.Element {
+export default function MainPage({ offerList }: MainPageProps): JSX.Element {
 
   const [selectedOffer, setSelectedOffer] = useState('');
 
-  const onMouseEnter = ((id: string) => {
+  const HandleMouseEnter = ((id: string) => {
     setSelectedOffer(id);
   });
 
-  const onMouseLeave = (() => {
+  const HandleMouseLeave = (() => {
     setSelectedOffer('');
   });
 
@@ -72,9 +71,9 @@ export default function MainPage({ offersCount, offerList }: MainPageProps): JSX
           <div className='cities__places-container container'>
             <section className='cities__places places'>
               <h2 className='visually-hidden'>Places</h2>
-              <b className='places__found'>{offersCount} places to stay in Amsterdam</b>
+              <b className='places__found'>{offerList.length} places to stay in Amsterdam</b>
               <form className='places__sorting' action='#' method='get'>
-                <span className='places__sorting-caption'>Sort by</span>
+                <span className='places__sorting-caption'>Sort by </span>
                 <span className='places__sorting-type' tabIndex={0}>
                   Popular
                   <svg className='places__sorting-arrow' width='7' height='4'>
@@ -91,14 +90,19 @@ export default function MainPage({ offersCount, offerList }: MainPageProps): JSX
               <div className='cities__places-list places__list tabs__content'>
                 <HotelList
                   offerList={offerList}
-                  onMouseEnter={onMouseEnter}
-                  onMouseLeave={onMouseLeave}
+                  onMouseEnter={HandleMouseEnter}
+                  onMouseLeave={HandleMouseLeave}
                 />
               </div>
             </section>
             <div className='cities__right-section'>
               <section className='cities__map map'>
-                <Map offerList={offerList} selectedOffer={selectedOffer} />
+                <Map
+                  offerList={offerList}
+                  selectedOffer={selectedOffer}
+                  height={MapSize.main.height}
+                  width={MapSize.main.width}
+                />
               </section>
             </div>
           </div>

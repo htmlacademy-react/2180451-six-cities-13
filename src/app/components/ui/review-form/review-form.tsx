@@ -1,10 +1,11 @@
 import { useState } from 'react';
+import { REVIEW_MAX_LENGTH } from '../../../../constants';
 
 export default function ReviewForm(): JSX.Element {
 
   const [, setRate] = useState('');
   const [review, setReview] = useState('');
-  const reviewTextChecking: boolean = review.length < 50;
+  const reviewTextChecking: boolean = review.length < REVIEW_MAX_LENGTH;
 
   return (
     <form className='reviews__form form' action='#' method='post'>

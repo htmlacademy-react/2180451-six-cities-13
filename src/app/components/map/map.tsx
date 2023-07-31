@@ -1,29 +1,31 @@
 import { Icon, Marker, layerGroup } from 'leaflet';
 import { useRef, useEffect } from 'react';
 import { OfferType } from '../../types/offer-type';
-import { MARKER_DEFAULT, MARKER_ACTIVE } from '../../../constants';
+import { MARKER_DEFAULT, MARKER_ACTIVE, MarkerSize } from '../../../constants';
 import useMap from '../hooks/use-map';
+
+const defaultCustomIcon = new Icon({
+  iconUrl: MARKER_DEFAULT,
+  iconSize: [MarkerSize.iconWidth, MarkerSize.iconHeight],
+  iconAnchor: [MarkerSize.iconAnchor, MarkerSize.iconHeight],
+});
+
+const activeCustomIcon = new Icon({
+  iconUrl: MARKER_ACTIVE,
+  iconSize: [MarkerSize.iconWidth, MarkerSize.iconHeight],
+  iconAnchor: [MarkerSize.iconAnchor, MarkerSize.iconHeight],
+});
 
 type MapProps = {
   offerList: OfferType[];
-  selectedOffer: string;
+  selectedOffer?: string;
+  width: string;
+  height: string;
 }
 
-export default function Map({ offerList, selectedOffer }: MapProps): JSX.Element {
+export default function Map({ offerList, selectedOffer, height, width }: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, offerList);
-
-  const defaultCustomIcon = new Icon({
-    iconUrl: MARKER_DEFAULT,
-    iconSize: [27, 39],
-    iconAnchor: [13, 39],
-  });
-
-  const activeCustomIcon = new Icon({
-    iconUrl: MARKER_ACTIVE,
-    iconSize: [27, 39],
-    iconAnchor: [13, 39],
-  });
 
   useEffect(() => {
     if (map) {
@@ -51,7 +53,7 @@ export default function Map({ offerList, selectedOffer }: MapProps): JSX.Element
 
   return (
     <div
-      style={{ height: '794px' }}
+      style={{ height: `${height}`, width: `${width}` }}
       ref={mapRef}
     >
     </div>
