@@ -1,23 +1,25 @@
 import { Map, TileLayer } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useRef, useState, useEffect, MutableRefObject } from 'react';
-import { OfferType } from '../../types/offer-type';
+import { useAppSelector } from './use-app-selector';
 
 export default function useMap(
   mapRef: MutableRefObject<HTMLElement | null>,
-  offerList: OfferType[]
+  currentCity: string
 ): Map | null {
+
   const [map, setMap] = useState<Map | null>(null);
   const isRenderedRef = useRef<boolean>(false);
+  const activeCity = useAppSelector((state) => state.cityList.find((city) => city.name === currentCity));
 
   useEffect(() => {
     if (mapRef.current !== null && !isRenderedRef.current) {
       const instance = new Map(mapRef.current, {
         center: {
-          lat: offerList[0].city.location.latitude,
-          lng: offerList[0].city.location.longitude,
+          lat: activeCity.location.latitude,
+          lng: activeCity.location.longitude,
         },
-        zoom: offerList[0].city.location.zoom,
+        zoom: activeCity.location.zoom,
       });
 
       const layer = new TileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
@@ -30,7 +32,7 @@ export default function useMap(
       setMap(instance);
       isRenderedRef.current = true;
     }
-  }, [mapRef, offerList]);
+  }, [mapRef, currentCity, activeCity]);
 
   return map;
 }
