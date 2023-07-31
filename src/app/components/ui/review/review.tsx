@@ -1,3 +1,4 @@
+import { DateFormat, RATE_FACTOR } from '../../../../constants';
 import { ReviewType } from '../../../types/review-type';
 import dayjs from 'dayjs';
 
@@ -6,9 +7,9 @@ type ReviewProps = {
 }
 
 export default function Review({ review }: ReviewProps): JSX.Element {
-  const reviewDate = dayjs(review.date).format('YYYY-MM-DD');
+  const reviewDate = dayjs(review.date).format(DateFormat.fullFormat);
   const year = dayjs(review.date).year();
-  const month = dayjs(review.date).format('MMMM');
+  const month = dayjs(review.date).format(DateFormat.monthFormat);
 
   return (
     <li className='reviews__item'>
@@ -21,7 +22,7 @@ export default function Review({ review }: ReviewProps): JSX.Element {
       <div className='reviews__info'>
         <div className='reviews__rating rating'>
           <div className='reviews__stars rating__stars'>
-            <span style={{ width: `${review.rating * 20}%` }}></span>
+            <span style={{ width: `${review.rating * RATE_FACTOR}%` }}></span>
             <span className='visually-hidden'>Rating</span>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import { AuthorizationStatus, OFFER_MAP_SIZE } from '../../../../constants';
+import { AuthorizationStatus, MapSize, NEAR_PLACE_CARD_COUNT, RATE_FACTOR } from '../../../../constants';
 import Header from '../../layouts/header/header';
 import ReviewForm from '../../ui/review-form/review-form';
 import { useParams } from 'react-router-dom';
@@ -9,6 +9,7 @@ import ReviewList from '../../ui/review-list/review-list';
 import { ReviewType } from '../../../types/review-type';
 import Map from '../../map/map';
 import NearPlaceList from '../../ui/near-place-list/near-place-list';
+import classNames from 'classnames';
 
 type OfferProps = {
   authStatus: string;
@@ -20,7 +21,7 @@ export default function Offer({ authStatus, offerList, reviewList }: OfferProps)
 
   const { id } = useParams();
   const filteredOffer = (offerList.find((offer: OfferType) => offer.id === id));
-  const nearOfferList = offerList.slice(0, 3);
+  const nearOfferList = offerList.slice(0, NEAR_PLACE_CARD_COUNT);
 
   return (
     <div>
@@ -67,7 +68,12 @@ export default function Offer({ authStatus, offerList, reviewList }: OfferProps)
                     <h1 className="offer__name">
                       {filteredOffer.title}
                     </h1>
-                    <button className={filteredOffer.isFavorite ? 'offer__bookmark-button offer__bookmark-button--active button' : 'offer__bookmark-button button'} type="button">
+                    <button
+                      className={
+                        classNames('offer__bookmark-button button', { 'offer__bookmark-button--active': filteredOffer.isFavorite })
+                      }
+                      type="button"
+                    >
                       <svg className="offer__bookmark-icon" width="31" height="33">
                         <use xlinkHref="#icon-bookmark"></use>
                       </svg>
@@ -76,7 +82,7 @@ export default function Offer({ authStatus, offerList, reviewList }: OfferProps)
                   </div>
                   <div className="offer__rating rating">
                     <div className="offer__stars rating__stars">
-                      <span style={{ width: `${filteredOffer.rating * 20}%` }}></span>
+                      <span style={{ width: `${filteredOffer.rating * RATE_FACTOR}%` }}></span>
                       <span className="visually-hidden">Rating</span>
                     </div>
                     <span className="offer__rating-value rating__value">{filteredOffer.rating}</span>
@@ -162,8 +168,8 @@ export default function Offer({ authStatus, offerList, reviewList }: OfferProps)
               </div>
               <section className="offer__map map" style={{ display: 'flex', justifyContent: 'center' }}>
                 <Map offerList={nearOfferList}
-                  width={OFFER_MAP_SIZE.width}
-                  height={OFFER_MAP_SIZE.height}
+                  width={MapSize.offer.width}
+                  height={MapSize.offer.height}
                 />
               </section>
             </section>

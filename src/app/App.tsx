@@ -13,19 +13,18 @@ import { OfferType } from './types/offer-type';
 import { ReviewType } from './types/review-type';
 
 type AppProps = {
-  offersCount: number;
   offerList: OfferType[];
   reviewList: ReviewType[];
 }
 
-export default function App({ offersCount, offerList, reviewList }: AppProps): JSX.Element {
+export default function App({ offerList, reviewList }: AppProps): JSX.Element {
 
   return (
     <HelmetProvider>
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
-          <Route path={AppRoute.Root} index element={<MainPage offersCount={offersCount} offerList={offerList} />} />
+          <Route path={AppRoute.Root} index element={<MainPage offerList={offerList} />} />
           <Route path={AppRoute.Favorites} element={
             <PrivateRoute authStatus={AuthorizationStatus.Auth}>
               <Favorites offerList={offerList} />
