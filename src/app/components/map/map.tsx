@@ -3,7 +3,6 @@ import { useRef, useEffect } from 'react';
 import { OfferType } from '../../types/offer-type';
 import { MARKER_DEFAULT, MARKER_ACTIVE, MarkerSize } from '../../../constants';
 import useMap from '../hooks/use-map';
-import { useAppSelector } from '../hooks/use-app-selector';
 import { CityType } from '../../types/city-type';
 
 const defaultCustomIcon = new Icon({
@@ -21,15 +20,16 @@ const activeCustomIcon = new Icon({
 type MapProps = {
   offerList: OfferType[];
   selectedOffer?: string;
-  currentCity?: string;
+  cityList: CityType[];
+  currentCity: string;
   width: string;
   height: string;
 }
 
-export default function Map({ offerList, selectedOffer, currentCity, height, width }: MapProps): JSX.Element {
+export default function Map({ offerList, selectedOffer, cityList, currentCity, height, width }: MapProps): JSX.Element {
 
   const mapRef = useRef(null);
-  const map = useMap(mapRef, currentCity);
+  const map = useMap(mapRef, cityList, currentCity);
 
   useEffect(() => {
     if (map) {

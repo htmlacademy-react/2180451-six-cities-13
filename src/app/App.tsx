@@ -26,7 +26,7 @@ export default function App({ offerList, reviewList, cityList }: AppProps): JSX.
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
-          <Route path={AppRoute.Root} index element={<MainPage offerList={offerList} cityList={cityList} />} />
+          <Route path={AppRoute.Root} index element={<MainPage cityList={cityList} />} />
           <Route path={AppRoute.Favorites} element={
             <PrivateRoute authStatus={AuthorizationStatus.Auth}>
               <Favorites offerList={offerList} />
