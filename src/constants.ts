@@ -33,6 +33,8 @@ export const DateFormat = {
   fullFormat: 'YYYY-MM-DD',
   monthFormat: 'MMMM',
 };
+export const TILE_LAYER = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
+export const ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
 
 export const MarkerSize = {
   iconWidth: 27,
@@ -40,7 +42,7 @@ export const MarkerSize = {
   iconAnchor: 13,
 };
 
-export const cityList: CityType[] = [
+export const CITY_LIST: CityType[] = [
   {
     id: 0,
     name: 'Paris',
@@ -54,9 +56,9 @@ export const cityList: CityType[] = [
     id: 1,
     name: 'Cologne',
     location: {
-      latitude: 50.950361,
-      longitude: 6.961974,
-      zoom: 16
+      latitude: 50.938361,
+      longitude: 6.959974,
+      zoom: 13
     },
   },
   {

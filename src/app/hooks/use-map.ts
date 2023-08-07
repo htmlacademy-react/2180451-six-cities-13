@@ -1,7 +1,8 @@
 import { Map, TileLayer } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useRef, useState, useEffect, MutableRefObject } from 'react';
-import { CityType } from '../../types/city-type';
+import { CityType } from '../types/city-type';
+import { ATTRIBUTION, TILE_LAYER } from '../../constants';
 
 export default function useMap(
   mapRef: MutableRefObject<HTMLElement | null>,
@@ -23,17 +24,22 @@ export default function useMap(
         zoom: activeCityLocation.location.zoom,
       });
 
-      const layer = new TileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+      const layer = new TileLayer(TILE_LAYER,
         {
-          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+          attribution: ATTRIBUTION,
         });
 
       instance.addLayer(layer);
 
       setMap(instance);
       isRenderedRef.current = true;
+    } else {
+      map?.setView(
+        [activeCityLocation.location.latitude, activeCityLocation.location.longitude],
+        activeCityLocation.location.zoom
+      );
     }
-  }, [mapRef, currentCity, activeCityLocation]);
+  }, [mapRef, activeCityLocation]);
 
   return map;
 }

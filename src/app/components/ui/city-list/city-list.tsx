@@ -1,7 +1,8 @@
 import { useDispatch } from 'react-redux';
 import { CityType } from '../../../types/city-type';
-import { changeCity, getActiveCity } from '../../../../store/action';
-import { useAppSelector } from '../../hooks/use-app-selector';
+import { getActiveCity } from '../../../selectors/selectors';
+import { changeCity } from '../../../../store/action';
+import { useAppSelector } from '../../../hooks/use-app-selector';
 import classNames from 'classnames';
 
 type CityListProps = {

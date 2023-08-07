@@ -1,6 +1,11 @@
-import { OfferType } from '../../types/offer-type';
+import { OfferType } from '../types/offer-type';
+import { useAppSelector } from './use-app-selector';
+import { getActiveSort } from '../selectors/selectors';
 
-export function useSort(offerList: OfferType[], currentSort: string) {
+export function useSort(offerList: OfferType[]) {
+
+  const currentSort = useAppSelector(getActiveSort);
+
   switch (currentSort) {
     case 'Price: low to high':
       return offerList.slice().sort((a, b) => a.price - b.price);
@@ -12,4 +17,3 @@ export function useSort(offerList: OfferType[], currentSort: string) {
       return offerList;
   }
 }
-

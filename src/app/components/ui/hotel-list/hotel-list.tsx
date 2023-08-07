@@ -12,16 +12,14 @@ export default function HotelList({ offerList, onMouseEnter, onMouseLeave }: Off
   return (
     <div className='cities__places-list places__list tabs__content'>
       {
-        offerList && offerList.length
-          ? offerList.map((offer: OfferType) => (
-            <HotelCard
-              hotelCard={offer}
-              key={offer.id}
-              onMouseEnter={onMouseEnter}
-              onMouseLeave={onMouseLeave}
-            />
-          ))
-          : <h1>No Offers!</h1>
+        offerList.map((offer: OfferType) => (
+          <HotelCard
+            hotelCard={offer}
+            key={offer.id}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+          />
+        ))
       }
     </div>
   );

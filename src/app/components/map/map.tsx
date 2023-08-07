@@ -2,7 +2,7 @@ import { Icon, Marker, layerGroup } from 'leaflet';
 import { useRef, useEffect } from 'react';
 import { OfferType } from '../../types/offer-type';
 import { MARKER_DEFAULT, MARKER_ACTIVE, MarkerSize } from '../../../constants';
-import useMap from '../hooks/use-map';
+import useMap from '../../hooks/use-map';
 import { CityType } from '../../types/city-type';
 
 const defaultCustomIcon = new Icon({
@@ -34,22 +34,21 @@ export default function Map({ offerList, selectedOffer, cityList, currentCity, h
   useEffect(() => {
     if (map) {
       const markerLayer = layerGroup().addTo(map);
-      if (offerList.length) {
-        offerList.forEach((offer) => {
-          const marker = new Marker({
-            lat: offer.location.latitude,
-            lng: offer.location.longitude,
-          });
-
-          marker
-            .setIcon(
-              offer.id === selectedOffer
-                ? activeCustomIcon
-                : defaultCustomIcon
-            )
-            .addTo(markerLayer);
+      offerList.forEach((offer) => {
+        const marker = new Marker({
+          lat: offer.location.latitude,
+          lng: offer.location.longitude,
         });
-      }
+
+        marker
+          .setIcon(
+            offer.id === selectedOffer
+              ? activeCustomIcon
+              : defaultCustomIcon
+          )
+          .addTo(markerLayer);
+      });
+
 
       return () => {
         map.removeLayer(markerLayer);

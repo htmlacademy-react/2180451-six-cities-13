@@ -1,9 +1,10 @@
 import classNames from 'classnames';
 import { useState } from 'react';
 import { sortOptions } from '../../../../constants';
-import { useAppSelector } from '../../hooks/use-app-selector';
-import { changeSortOption, getActiveSort } from '../../../../store/action';
-import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { useAppSelector } from '../../../hooks/use-app-selector';
+import { getActiveSort } from '../../../selectors/selectors';
+import { changeSortOption } from '../../../../store/action';
+import { useAppDispatch } from '../../../hooks/use-app-dispatch';
 
 export default function SortingForm(): JSX.Element {
 

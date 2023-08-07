@@ -1,12 +1,12 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { changeCity, changeSortOption } from './action';
 import { offerList } from '../app/mocks/offer-list';
-import { cityList, sortOptions } from '../constants';
+import { CITY_LIST, sortOptions } from '../constants';
 
 const initialState = {
-  activeCity: cityList[0].name,
+  activeCity: CITY_LIST[0].name,
   activeSort: sortOptions[0],
-  cityList: cityList,
+  cityList: CITY_LIST,
   offers: offerList,
 };
 
