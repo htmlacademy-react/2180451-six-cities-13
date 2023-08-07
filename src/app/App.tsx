@@ -11,22 +11,20 @@ import PrivateRoute from './components/utils/private-route/private-route';
 import { AuthorizationStatus, AppRoute } from '../constants';
 import { OfferType } from './types/offer-type';
 import { ReviewType } from './types/review-type';
-import { CityType } from './types/city-type';
 
 type AppProps = {
   offerList: OfferType[];
   reviewList: ReviewType[];
-  cityList: CityType[];
 }
 
-export default function App({ offerList, reviewList, cityList }: AppProps): JSX.Element {
+export default function App({ offerList, reviewList }: AppProps): JSX.Element {
 
   return (
     <HelmetProvider>
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
-          <Route path={AppRoute.Root} index element={<MainPage offerList={offerList} cityList={cityList} />} />
+          <Route path={AppRoute.Root} index element={<MainPage />} />
           <Route path={AppRoute.Favorites} element={
             <PrivateRoute authStatus={AuthorizationStatus.Auth}>
               <Favorites offerList={offerList} />

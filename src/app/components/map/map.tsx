@@ -2,8 +2,7 @@ import { Icon, Marker, layerGroup } from 'leaflet';
 import { useRef, useEffect } from 'react';
 import { OfferType } from '../../types/offer-type';
 import { MARKER_DEFAULT, MARKER_ACTIVE, MarkerSize } from '../../../constants';
-import useMap from '../hooks/use-map';
-import { useAppSelector } from '../hooks/use-app-selector';
+import useMap from '../../hooks/use-map';
 import { CityType } from '../../types/city-type';
 
 const defaultCustomIcon = new Icon({
@@ -21,35 +20,35 @@ const activeCustomIcon = new Icon({
 type MapProps = {
   offerList: OfferType[];
   selectedOffer?: string;
-  currentCity?: string;
+  cityList: CityType[];
+  currentCity: string;
   width: string;
   height: string;
 }
 
-export default function Map({ offerList, selectedOffer, currentCity, height, width }: MapProps): JSX.Element {
+export default function Map({ offerList, selectedOffer, cityList, currentCity, height, width }: MapProps): JSX.Element {
 
   const mapRef = useRef(null);
-  const map = useMap(mapRef, currentCity);
+  const map = useMap(mapRef, cityList, currentCity);
 
   useEffect(() => {
     if (map) {
       const markerLayer = layerGroup().addTo(map);
-      if (offerList.length) {
-        offerList.forEach((offer) => {
-          const marker = new Marker({
-            lat: offer.location.latitude,
-            lng: offer.location.longitude,
-          });
-
-          marker
-            .setIcon(
-              offer.id === selectedOffer
-                ? activeCustomIcon
-                : defaultCustomIcon
-            )
-            .addTo(markerLayer);
+      offerList.forEach((offer) => {
+        const marker = new Marker({
+          lat: offer.location.latitude,
+          lng: offer.location.longitude,
         });
-      }
+
+        marker
+          .setIcon(
+            offer.id === selectedOffer
+              ? activeCustomIcon
+              : defaultCustomIcon
+          )
+          .addTo(markerLayer);
+      });
+
 
       return () => {
         map.removeLayer(markerLayer);
